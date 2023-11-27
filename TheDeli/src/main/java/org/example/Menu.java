@@ -87,7 +87,7 @@ public class Menu {
     private void calculateMeatPremiums() {
         if (isMeatPremium()) {
             meatPremium = 1.00;
-            if (isExtraMeatPremium()) {
+            if (isMeatPremium()) {
                 extraMeatPremium = 0.50;
             }
         }
@@ -96,7 +96,7 @@ public class Menu {
     private void calculateCheesePremiums() {
         if (isCheesePremium()) {
             cheesePremium = 0.75;
-            if (isExtraCheesePremium()) {
+            if (isCheesePremium()) {
                 extraCheesePremium = 0.30;
             }
         }
@@ -110,21 +110,12 @@ public class Menu {
                 || meatType.equals("Chicken");
     }
 
-    private boolean isExtraMeatPremium() {
-        return meatType.equals("Angus Beef")
-                || meatType.equals("Bacon");
-    }
-
     private boolean isCheesePremium() {
         return cheeseType.equals("Provolone")
                 || cheeseType.equals("Cheddar")
                 || cheeseType.equals("Swiss");
     }
 
-    private boolean isExtraCheesePremium() {
-        return cheeseType.equals("Pepperjack")
-                || cheeseType.equals("Provolone");
-    }
 
     public double calculateTotalPrice() {
         double totalPrice = basePrice;
