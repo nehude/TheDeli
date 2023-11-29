@@ -6,34 +6,63 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SandwichSelections extends JFrame {
-
+    private JComboBox<String> sizeOptionComboBox;
+    private JComboBox<String> extraMeatComboBox;
         private JComboBox<String> breadTypeComboBox;
-        private JCheckBox[] premiumToppingsCheckBoxes;
+        private JCheckBox[] premiumToppingsMeatCheckBoxes;
+        private JComboBox<String> premiumToppingsCheeseComboBox;
+        private JComboBox<String> extraCheeseComboBox;
         private JCheckBox[] regularToppingsCheckBoxes;
+        private JCheckBox[] sauceChoiceCheckBoxes;
         private JButton submitButton;
 
         public SandwichSelections() {
-            setTitle(" Sandwich Ordering");
-            setSize(400, 300);
+            setTitle("New Sandwich");
+            setSize(500, 600);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLayout(new FlowLayout());
+            setLayout(new GridLayout(0, 1));
+
+            //Size
+            String[] sizeOptions = {"Small", "Medium", "Large"};
+            sizeOptionComboBox = new JComboBox<>(sizeOptions);
+
 
             // Bread types
             String[] breadTypes = {"White", "Wheat", "Rye", "Wrap"};
             breadTypeComboBox = new JComboBox<>(breadTypes);
 
-            // Premium toppings
-            String[] premiumToppings = {"Meat", "Cheese"};
-            premiumToppingsCheckBoxes = new JCheckBox[premiumToppings.length];
-            for (int i = 0; i < premiumToppings.length; i++) {
-                premiumToppingsCheckBoxes[i] = new JCheckBox(premiumToppings[i]);
+            // Meat Selection
+            String[] premiumToppingsMeat = {"Steak", "Ham", "Salami", "Roast Beef", "Chicken", "Bacon"};
+            premiumToppingsMeatCheckBoxes = new JCheckBox[premiumToppingsMeat.length];
+            for (int i = 0; i < premiumToppingsMeat.length; i++) {
+                premiumToppingsMeatCheckBoxes[i] = new JCheckBox(premiumToppingsMeat[i]);
             }
 
+            //Extra Meat
+            String[] extraMeatChoice = {"Yes", "No"};
+            extraMeatComboBox = new JComboBox<>(extraMeatChoice);
+
+            //Cheese Selection
+            String[] premiumToppingsCheese = {"American", "Provolone", "Cheddar", "Swiss"};
+            premiumToppingsCheeseComboBox = new JComboBox<>(premiumToppingsCheese);
+
+            //Extra Cheese
+            String[] extraCheeseChoice = {"Yes", "No"};
+            extraCheeseComboBox = new JComboBox<>(extraCheeseChoice);
+
             // Regular toppings
-            String[] regularToppings = {"Lettuce", "Tomato", "Onion"};
+            String[] regularToppings = {"Lettuce", "Peppers", "Onions", "Jalapenos", "Tomatoes", "Cucumbers", "Pickles",
+            "Guacamole", "Mushrooms"};
             regularToppingsCheckBoxes = new JCheckBox[regularToppings.length];
             for (int i = 0; i < regularToppings.length; i++) {
                 regularToppingsCheckBoxes[i] = new JCheckBox(regularToppings[i]);
+            }
+
+            //Sauce Selection
+            String[] sauceSelections = {"Mayo", "Mustard", "Ketchup", "Ranch", "Thousand Island", "Vinaigrette"};
+            sauceChoiceCheckBoxes = new JCheckBox[sauceSelections.length];
+            for (int i = 0; i < sauceSelections.length; i++){
+                sauceChoiceCheckBoxes[i] = new JCheckBox(sauceSelections[i]);
             }
 
             submitButton = new JButton("Submit");
@@ -41,48 +70,95 @@ public class SandwichSelections extends JFrame {
             submitButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     String selectedBreadType = (String) breadTypeComboBox.getSelectedItem();
-                    ArrayList<String> selectedPremiumToppings = new ArrayList<>();
-                    ArrayList<String> selectedRegularToppings = new ArrayList<>();
+                    String selectedSize = (String) sizeOptionComboBox.getSelectedItem();
+                    String selectedExtraMeat = (String) extraMeatComboBox.getSelectedItem();
+                    String selectedExtraCheese = (String) extraCheeseComboBox.getSelectedItem();
 
-                    for (JCheckBox checkBox : premiumToppingsCheckBoxes) {
+                    ArrayList<String> selectedPremiumToppingsMeat = new ArrayList<>();
+                    for (JCheckBox checkBox : premiumToppingsMeatCheckBoxes) {
                         if (checkBox.isSelected()) {
-                            selectedPremiumToppings.add(checkBox.getText());
+                            selectedPremiumToppingsMeat.add(checkBox.getText());
                         }
                     }
 
+                    String selectedPremiumToppingsCheese = (String) premiumToppingsCheeseComboBox.getSelectedItem();
+
+                    ArrayList<String> selectedRegularToppings = new ArrayList<>();
                     for (JCheckBox checkBox : regularToppingsCheckBoxes) {
                         if (checkBox.isSelected()) {
                             selectedRegularToppings.add(checkBox.getText());
                         }
                     }
 
+                    ArrayList<String> selectedSauces = new ArrayList<>();
+                    for (JCheckBox checkBox : sauceChoiceCheckBoxes) {
+                        if (checkBox.isSelected()) {
+                            selectedSauces.add(checkBox.getText());
+                        }
+                    }
+
+                    System.out.println("Selected Size: " + selectedSize);
                     System.out.println("Selected Bread Type: " + selectedBreadType);
-                    System.out.println("Selected Premium Toppings: " + selectedPremiumToppings);
+                    System.out.println("Selected Extra Meat: " + selectedExtraMeat);
+                    System.out.println("Selected Extra Cheese: " + selectedExtraCheese);
+                    System.out.println("Selected Premium Toppings (Meat): " + selectedPremiumToppingsMeat);
+                    System.out.println("Selected Premium Toppings (Cheese): " + selectedPremiumToppingsCheese);
                     System.out.println("Selected Regular Toppings: " + selectedRegularToppings);
+                    System.out.println("Selected Sauces: " + selectedSauces);
+                    dispose();
                 }
             });
 
-            add(new JLabel("Select Bread Type:"));
-            add(breadTypeComboBox);
+            JPanel sizePanel = new JPanel(new FlowLayout());
+            sizePanel.add(new JLabel("Size:"));
+            sizePanel.add(sizeOptionComboBox);
 
-            add(new JLabel("Select Premium Toppings:"));
-            for (JCheckBox checkBox : premiumToppingsCheckBoxes) {
-                add(checkBox);
+            JPanel breadPanel = new JPanel(new FlowLayout());
+            breadPanel.add(new JLabel("Bread Type:"));
+            breadPanel.add(breadTypeComboBox);
+
+            JPanel meatPanel = new JPanel(new FlowLayout());
+            meatPanel.add(new JLabel("Meat Choice:"));
+            for (JCheckBox checkBox : premiumToppingsMeatCheckBoxes) {
+                meatPanel.add(checkBox);
             }
 
-            add(new JLabel("Select Regular Toppings:"));
+            JPanel extraMeatPanel = new JPanel(new FlowLayout());
+            extraMeatPanel.add(new JLabel("Extra Meat: "));
+            extraMeatPanel.add(extraMeatComboBox);
+
+            JPanel cheesePanel = new JPanel(new FlowLayout());
+            cheesePanel.add(new JLabel("Cheese:"));
+            cheesePanel.add(premiumToppingsCheeseComboBox);
+
+            JPanel extraCheesePanel = new JPanel(new FlowLayout());
+            extraCheesePanel.add(new JLabel("Extra Cheese:"));
+            extraCheesePanel.add(extraCheeseComboBox);
+
+            JPanel toppingsPanel = new JPanel(new FlowLayout());
+            toppingsPanel.add(new JLabel("Toppings:"));
             for (JCheckBox checkBox : regularToppingsCheckBoxes) {
-                add(checkBox);
+                toppingsPanel.add(checkBox);
             }
 
-            add(submitButton);
+            JPanel saucesPanel = new JPanel(new FlowLayout());
+            saucesPanel.add(new JLabel("Sauces:"));
+            for (JCheckBox checkBox : sauceChoiceCheckBoxes){
+                saucesPanel.add(checkBox);
+            }
 
+            JPanel buttonPanel = new JPanel(new FlowLayout());
+            buttonPanel.add(submitButton);
+
+            add(sizePanel);
+            add(breadPanel);
+            add(meatPanel);
+            add(extraMeatPanel);
+            add(cheesePanel);
+            add(extraCheesePanel);
+            add(toppingsPanel);
+            add(buttonPanel);
             setVisible(true);
         }
-
-        public static void main(String[] args) {
-            new SandwichSelections();
-        }
-
-
+        
 }
