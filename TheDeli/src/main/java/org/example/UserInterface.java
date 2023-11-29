@@ -157,86 +157,34 @@ public class UserInterface {
                 return;
         }
 
-
-        System.out.println("Select drink flavor:");
-        System.out.println("1. Sweet Tea");
-        System.out.println("2. Coke");
-        System.out.println("3. Sprite");
-        System.out.println("4. Lemonade");
-        System.out.println("5. Dr. Pepper");
-        System.out.println("6. Coke Zero");
-        System.out.println("7. Orange Fanta");
-        System.out.print("Enter your choice: ");
-        int flavorChoice = scanner.nextInt();
-
-        switch (flavorChoice) {
-            case 1:
-                drink.setFlavor("Sweet Tea");
-                break;
-            case 2:
-                drink.setFlavor("Coke");
-                break;
-            case 3:
-                drink.setFlavor("Sprite");
-                break;
-            case 4:
-                drink.setFlavor("Lemonade");
-                break;
-            case 5:
-                drink.setFlavor("Dr. Pepper");
-                break;
-            case 6:
-                drink.setFlavor("Coke Zero");
-                break;
-            case 7:
-                drink.setFlavor("Orange Fanta");
-                break;
-            default:
-                System.out.println("Invalid choice. Going back to the order screen.");
-                return;
-        }
-
         order.addDrink(drink);
         System.out.println("Drink added to the order!");
     }
 
 
-    private static void addChips(Order order, Scanner scanner) {
-        Scanner input = new Scanner(System.in);
+    public void addChipsToOrder(Scanner scanner, boolean isSide) {
+        System.out.println("Would you like to add chips to your order?");
+        String chipsInput = scanner.nextLine();
+        boolean wantsChips = chipsInput.equalsIgnoreCase("yes");
 
-        Chips chips = new Chips();
+        if (wantsChips) {
+            int chipQuantity;
+            do {
+                System.out.println("Enter the quantity of chips you want:");
+                chipQuantity = scanner.nextInt();
+            } while (chipQuantity < 1);
 
-        System.out.println("Select chip flavor:");
-        System.out.println("1. Cheddar Jalapeno");
-        System.out.println("2. Regular Lays");
-        System.out.println("3. BBQ");
-        System.out.println("4. Spicy");
-        System.out.print("Enter your choice: ");
-        int flavorChoice = scanner.nextInt();
+            if (isSide) {
+                menu.addSide(new Chip("Chips", 1.50, chipQuantity));
+            } else {
+                menu.addMainItem(new Chip("Chips", 1.50, chipQuantity));
+            }
 
-        switch (flavorChoice) {
-            case 1:
-                chips.setFlavor("Cheddar Jalapeno");
-                break;
-            case 2:
-                chips.setFlavor("Regular Lays");
-                break;
-            case 3:
-                chips.setFlavor("BBQ");
-                break;
-            case 4:
-                chips.setFlavor("Spicy");
-                break;
-            default:
-                System.out.println("Invalid choice. Going back to the order screen.");
-                return;
+            System.out.println("Chips added to your order.");
+        } else {
+            System.out.println("Chips not added to your order.");
         }
-
-        order.addChips(chips);
-        System.out.println("Chips added to the order!");
     }
-
-
 
     private static void checkout(Order order, Scanner scanner) {
       //method for checkout goes here
