@@ -53,22 +53,6 @@ public class UserInterface extends JFrame {
             }
         });
 
-       /* JPanel imagePanel = new JPanel(new BorderLayout());
-        String imagePath = "C:\\Users\\lesli\\OneDrive\\Pictures\\Screenshots\\Screenshot 2023-11-30 152427.png";
-        File file = new File(imagePath);
-        if (file.exists()) {
-            ImageIcon imageIcon = new ImageIcon(imagePath);
-            JLabel imageLabel = new JLabel(imageIcon);
-            imagePanel.add(imageLabel, BorderLayout.CENTER);
-        } else {
-            JLabel errorLabel = new JLabel("Image not found!");
-            imagePanel.add(errorLabel, BorderLayout.CENTER);
-        }
-
-        add(imagePanel, BorderLayout.CENTER);
-        
-        */
-
         add(startOrderButton);
         add(exitButton);
         setVisible(true);
@@ -134,7 +118,6 @@ public class UserInterface extends JFrame {
             cancelOrderButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // code for canceling order
                     JOptionPane.showMessageDialog(null, "Order canceled");
                     dispose();
                 }

@@ -26,6 +26,7 @@ public class SandwichSelections extends JFrame {
     private String selectedPremiumToppingsCheese;
     private List<String> selectedRegularToppings;
     private List<String> selectedSauces;
+    private JComboBox<String> isToastedComboBox;
 
     public SandwichSelections() {
         setTitle("New Sandwich");
@@ -60,6 +61,10 @@ public class SandwichSelections extends JFrame {
         // Extra Cheese
         String[] extraCheeseChoice = {"Yes", "No"};
         extraCheeseComboBox = new JComboBox<>(extraCheeseChoice);
+
+        //Toasted
+        String[] isToastedChoice = {"Yes", "No"};
+        isToastedComboBox = new JComboBox<>(isToastedChoice);
 
         // Regular toppings
         String[] regularToppings = {"Lettuce", "Peppers", "Onions", "Jalapenos", "Tomatoes", "Cucumbers", "Pickles",
@@ -110,6 +115,10 @@ public class SandwichSelections extends JFrame {
         extraCheesePanel.add(new JLabel("Extra Cheese:"));
         extraCheesePanel.add(extraCheeseComboBox);
 
+        JPanel isToastedPanel = new JPanel(new FlowLayout());
+        isToastedPanel.add(new JLabel("Toasted: "));
+        isToastedPanel.add(isToastedComboBox);
+
         JPanel toppingsPanel = new JPanel(new FlowLayout());
         toppingsPanel.add(new JLabel("Toppings:"));
         for (JCheckBox checkBox : regularToppingsCheckBoxes) {
@@ -131,6 +140,7 @@ public class SandwichSelections extends JFrame {
         add(extraMeatPanel);
         add(cheesePanel);
         add(extraCheesePanel);
+        add(isToastedPanel);
         add(toppingsPanel);
         add(saucesPanel);
         add(buttonPanel);
