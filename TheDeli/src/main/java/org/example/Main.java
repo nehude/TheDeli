@@ -1,7 +1,9 @@
 package org.example;
 
 public class Main {
+
     public static void main(String[] args) {
-        System.out.println( "Hey girlies <3");
+        UserInterface ui = new UserInterface();
+        ui.startNewOrder();
     }
 }

@@ -1,32 +1,22 @@
 package org.example;
 
-import java.util.ArrayList;
+public enum Bread {
+    WHITE("White"),
+    WHEAT("Wheat"),
+    RYE("Rye"),
+    WRAP("Wrap");
 
-public class Bread {
+    private final String breadType;
 
-    private String breadType;
-
-    private ArrayList<String> breadOptions;
-
-    public Bread(String breadType) {
+    Bread(String breadType) {
         this.breadType = breadType;
-        breadOptions = new ArrayList<>();
-        breadOptions.add("White");
-        breadOptions.add("Wheat");
-        breadOptions.add("Rye");
-        breadOptions.add("Wrap");
     }
 
     public String getBreadType() {
         return breadType;
     }
 
-    public void setBreadType(String breadType) {
-        this.breadType = breadType;
-    }
-
-    public ArrayList<String> getBreadOptions() {
-        return breadOptions;
+    public void toast() {
+        System.out.println("Toasting the " + breadType + " bread...");
     }
 }
-
