@@ -32,6 +32,7 @@ public class SandwichSelections extends JFrame {
         setSize(500, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(0, 1));
+        getContentPane().setBackground(new Color(255, 192, 203));
 
         // Size
         String[] sizeOptions = {"Small", "Medium", "Large"};

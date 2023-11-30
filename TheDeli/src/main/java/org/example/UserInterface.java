@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 
 public class UserInterface extends JFrame {
@@ -22,11 +23,16 @@ public class UserInterface extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(0, 1));
 
+        getContentPane().setBackground(new Color(255, 192, 203));
+
         JLabel welcomeLabel = new JLabel("Welcome to the Gorgeous Girlies Sandwich Shop!");
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        welcomeLabel.setForeground(Color.DARK_GRAY);
         add(welcomeLabel);
 
         startOrderButton = new JButton("Start New Order");
+        startOrderButton.setBackground(new Color(255, 182, 193));
+        startOrderButton.setForeground(Color.DARK_GRAY);
         startOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,6 +44,8 @@ public class UserInterface extends JFrame {
         });
 
         exitButton = new JButton("Exit");
+        exitButton.setBackground(new Color(255, 182, 193));
+        exitButton.setForeground(Color.DARK_GRAY);
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,10 +53,28 @@ public class UserInterface extends JFrame {
             }
         });
 
+       /* JPanel imagePanel = new JPanel(new BorderLayout());
+        String imagePath = "C:\\Users\\lesli\\OneDrive\\Pictures\\Screenshots\\Screenshot 2023-11-30 152427.png";
+        File file = new File(imagePath);
+        if (file.exists()) {
+            ImageIcon imageIcon = new ImageIcon(imagePath);
+            JLabel imageLabel = new JLabel(imageIcon);
+            imagePanel.add(imageLabel, BorderLayout.CENTER);
+        } else {
+            JLabel errorLabel = new JLabel("Image not found!");
+            imagePanel.add(errorLabel, BorderLayout.CENTER);
+        }
+
+        add(imagePanel, BorderLayout.CENTER);
+        
+        */
+
         add(startOrderButton);
         add(exitButton);
         setVisible(true);
+
     }
+
 
     public void startNewOrder() {
         currentStep = 1;
@@ -57,8 +83,11 @@ public class UserInterface extends JFrame {
     }
 
     private void displayOrderScreen() {
+
         if (currentStep == 1) {
             JButton addSandwichButton = new JButton("Add Sandwich");
+            addSandwichButton.setBackground(new Color(255, 182, 193));
+            addSandwichButton.setForeground(Color.DARK_GRAY);
             addSandwichButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -68,6 +97,8 @@ public class UserInterface extends JFrame {
             });
 
             JButton addChipsButton = new JButton("Add Chips");
+            addChipsButton.setBackground(new Color(255, 182, 193));
+            addChipsButton.setForeground(Color.DARK_GRAY);
             addChipsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -77,6 +108,8 @@ public class UserInterface extends JFrame {
             });
 
             JButton addDrinkButton = new JButton("Add Drink");
+            addDrinkButton.setBackground(new Color(255, 182, 193));
+            addDrinkButton.setForeground(Color.DARK_GRAY);
             addDrinkButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -86,6 +119,8 @@ public class UserInterface extends JFrame {
             });
 
             JButton checkoutButton = new JButton("Checkout");
+            checkoutButton.setBackground(new Color(255, 182, 193));
+            checkoutButton.setForeground(Color.DARK_GRAY);
             checkoutButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -94,6 +129,8 @@ public class UserInterface extends JFrame {
             });
 
             JButton cancelOrderButton = new JButton("Cancel Order");
+            cancelOrderButton.setBackground(new Color(255, 182, 193));
+            cancelOrderButton.setForeground(Color.DARK_GRAY);
             cancelOrderButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
