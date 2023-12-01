@@ -13,6 +13,7 @@ public class UserInterface extends JFrame {
     private DrinkSelections drinkSelections;
     private ChipsSelections chipsSelections;
     private ReceiptFileManager receiptFileManager;
+    private CheckoutSelections checkoutSelections;
 
     private int currentStep = 0;
     private JPanel buttonPanelStep2;
@@ -219,14 +220,10 @@ public class UserInterface extends JFrame {
 
         // Set the total price
         totalOrderPrice = Math.round(totalOrderPrice * 100.0) / 100.0;
-        generateReceipt(totalOrderPrice);
-    }
 
-    private void generateReceipt(double totalOrderPrice) {
-        receiptFileManager.createReceiptFile(orderDetails, totalOrderPrice);
-        JOptionPane.showMessageDialog(null, "Receipt generated successfully!");
-        orderDetails.clear();
-        dispose();
+        // Show checkout screen
+        CheckoutSelections checkoutSelections = new CheckoutSelections(orderDetails, totalOrderPrice, this);
+        checkoutSelections.displayCheckoutScreen();
     }
 
 
