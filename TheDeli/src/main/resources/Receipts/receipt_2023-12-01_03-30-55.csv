@@ -1,0 +1,25 @@
+Order Details
+Order Date: 2023-12-01 03:30:55
+
+Sandwich Details:
+Bread Type: White
+Size: Small
+Extra Meat: Yes
+Extra Cheese: Yes
+Premium Toppings (Meat): Ham
+Premium Toppings (Cheese): American
+Regular Toppings: Lettuce
+Sauces: Mayo, Mustard
+Price: $7.25
+
+Chips Details:
+Chip Type: Cheddar
+Price: $1.5
+
+Drink Details:
+Drink Size: Small
+Drink Type: DrinkType
+Price: $2.0
+
+
+Total Price: $10.75

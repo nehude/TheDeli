@@ -206,7 +206,7 @@ public class UserInterface extends JFrame {
 
         // Drink details
         String selectedDrinkSize = drinkSelections.getSelectedDrinkSize();
-        String drinkType = "DrinkType";
+        String drinkType = drinkSelections.getSelectedDrinkType();
         double drinkPrice = drinkSelections.calculateDrinkPrice(selectedDrinkSize);
         totalOrderPrice += drinkPrice;
 
