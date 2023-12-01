@@ -47,7 +47,7 @@ public class CheckoutSelections extends JFrame {
             dispose();
         });
 
-        JButton returnButton = new JButton("Return");
+        JButton returnButton = new JButton("Cancel Order");
         returnButton.addActionListener(e -> dispose());
 
         buttonPanel.add(confirmButton);

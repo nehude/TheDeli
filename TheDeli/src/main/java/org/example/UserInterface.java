@@ -121,9 +121,10 @@ public class UserInterface extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JOptionPane.showMessageDialog(null, "Order canceled");
-                    dispose();
+                    cancelOrderAndReset();
                 }
             });
+
 
             buttonPanelStep2 = new JPanel(new GridLayout(0, 1));
             buttonPanelStep2.add(addSandwichButton);
@@ -224,6 +225,28 @@ public class UserInterface extends JFrame {
         // Show checkout screen
         CheckoutSelections checkoutSelections = new CheckoutSelections(orderDetails, totalOrderPrice, this);
         checkoutSelections.displayCheckoutScreen();
+
+        resetToInitialState();
+    }
+
+    private void resetToInitialState() {
+        // Remove the order buttons from the UI
+        remove(buttonPanelStep2);
+
+        // Show the start and exit buttons
+        startOrderButton.setVisible(true);
+        exitButton.setVisible(true);
+
+        // Reset the user interface
+        revalidate();
+        repaint();
+    }
+    private void cancelOrderAndReset() {
+        // Clear all order details
+        orderDetails.clear();
+
+        // Reset the UI to the initial state
+        resetToInitialState();
     }
 
 
