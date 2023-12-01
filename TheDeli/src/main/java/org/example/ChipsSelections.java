@@ -9,12 +9,14 @@ public class ChipsSelections extends JFrame {
     private JComboBox<String> chipTypeComboBox;
     private JButton submitButton;
 
-    private String selectedChipType;
+    private ReceiptFileManager receiptFileManager;
 
-    public ChipsSelections() {
+    public ChipsSelections(ReceiptFileManager receiptFileManager) {
+        this.receiptFileManager = receiptFileManager;
+
         setTitle("Add Chips");
         setSize(300, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(0, 1));
 
         String[] chipTypes = {"Original", "Barbecue", "Salt and Vinegar", "Cheddar", "Sour Cream and Onion", "Jalapeno"};
@@ -40,16 +42,21 @@ public class ChipsSelections extends JFrame {
     }
 
     private void collectChipsDetails() {
-        selectedChipType = (String) chipTypeComboBox.getSelectedItem();
+        String selectedChipType = getSelectedChipType();
+        double chipPrice = calculateChipPrice(selectedChipType);
 
-        // handle chip selection
+        JOptionPane.showMessageDialog(null, "Chips added to order. Price: $" + chipPrice);
 
-        JOptionPane.showMessageDialog(null, "Chips added to order");
-
-        dispose();
+        dispose(); // Close this window
     }
 
     public String getSelectedChipType() {
-        return selectedChipType;
+        return (String) chipTypeComboBox.getSelectedItem();
+    }
+
+    public double calculateChipPrice(String selectedChipType) {
+        // Replace with the actual logic to calculate chip price based on the selectedChipType
+        // For now, returning a fixed price of $1.50 as a placeholder
+        return 1.50;
     }
 }

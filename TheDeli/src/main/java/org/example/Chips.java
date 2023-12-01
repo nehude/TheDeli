@@ -6,21 +6,7 @@ public class Chips {
 
     public Chips(String chipType) {
         this.chipType = chipType;
-        initializePrices();
-    }
-
-    private void initializePrices(){}
-    // price for chips
-
-
-    public void displayChipDetails() {
-        System.out.println("Chips: " + chipType);
-        System.out.println("Price: $" + chipPrice);
-    }
-
-
-    public String getChipType() {
-        return chipType;
+        this.chipPrice = 1.50;
     }
 
     public void setChipType(String chipType) {
@@ -29,6 +15,14 @@ public class Chips {
 
     public double getChipPrice() {
         return chipPrice;
+    }
+
+    public void setChipPrice(double chipPrice) {
+        this.chipPrice = chipPrice;
+    }
+
+    public String getChipType() {
+        return chipType;
     }
 
     public double calculateTotalPrice() {

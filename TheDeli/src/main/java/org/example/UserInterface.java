@@ -4,18 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserInterface extends JFrame {
     private SandwichBuilder sandwichBuilder;
     private SandwichSelections sandwichSelections;
+    private DrinkSelections drinkSelections;
+    private ChipsSelections chipsSelections;
     private ReceiptFileManager receiptFileManager;
 
     private int currentStep = 0;
     private JPanel buttonPanelStep2;
     private JButton startOrderButton;
     private JButton exitButton;
+
+    private List<String> orderDetails = new ArrayList<>();
 
     public UserInterface() {
         setTitle("Gorgeous Girlies Sandwich Shop");
@@ -56,18 +60,17 @@ public class UserInterface extends JFrame {
         add(startOrderButton);
         add(exitButton);
         setVisible(true);
-
     }
-
 
     public void startNewOrder() {
         currentStep = 1;
-        sandwichBuilder = new SandwichBuilder();
         receiptFileManager = new ReceiptFileManager();
+        sandwichBuilder = new SandwichBuilder();
+        chipsSelections = new ChipsSelections(receiptFileManager);
+        drinkSelections = new DrinkSelections(receiptFileManager);
     }
 
     private void displayOrderScreen() {
-
         if (currentStep == 1) {
             JButton addSandwichButton = new JButton("Add Sandwich");
             addSandwichButton.setBackground(new Color(255, 182, 193));
@@ -86,7 +89,6 @@ public class UserInterface extends JFrame {
             addChipsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    ChipsSelections chipsSelections = new ChipsSelections();
                     chipsSelections.setVisible(true);
                 }
             });
@@ -97,7 +99,6 @@ public class UserInterface extends JFrame {
             addDrinkButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DrinkSelections drinkSelections = new DrinkSelections();
                     drinkSelections.setVisible(true);
                 }
             });
@@ -131,15 +132,16 @@ public class UserInterface extends JFrame {
             buttonPanelStep2.add(cancelOrderButton);
             add(buttonPanelStep2);
 
-            pack();
+            revalidate();
+            repaint();
+
             setVisible(true);
         }
     }
 
-
-
-
     private void collectAndProcessOrderDetails() {
+        double totalOrderPrice = 0.0;
+
         String selectedBreadType = sandwichSelections.getSelectedBreadType();
         String selectedSize = sandwichSelections.getSelectedSize();
         String selectedExtraMeat = sandwichSelections.getSelectedExtraMeat();
@@ -160,10 +162,73 @@ public class UserInterface extends JFrame {
                 .sauces(selectedSauces)
                 .build();
 
-        receiptFileManager.printSandwichDetailsToReceipt(sandwich);
-        JOptionPane.showMessageDialog(null, "Order submitted successfully!");
+        double sandwichPrice = sandwich.calculateTotalPrice();
+        totalOrderPrice += sandwichPrice;
+
+        StringBuilder sandwichDetails = new StringBuilder();
+        sandwichDetails.append("Sandwich Details:\n");
+        sandwichDetails.append("Bread Type: ").append(selectedBreadType).append("\n");
+        sandwichDetails.append("Size: ").append(selectedSize).append("\n");
+        sandwichDetails.append("Extra Meat: ").append(selectedExtraMeat).append("\n");
+        sandwichDetails.append("Extra Cheese: ").append(selectedExtraCheese).append("\n");
+
+        if (!selectedPremiumToppingsMeat.isEmpty()) {
+            sandwichDetails.append("Premium Toppings (Meat): ").append(String.join(", ", selectedPremiumToppingsMeat)).append("\n");
+        }
+
+        if (!selectedPremiumToppingsCheese.isEmpty()) {
+            sandwichDetails.append("Premium Toppings (Cheese): ").append(selectedPremiumToppingsCheese).append("\n");
+        }
+
+        if (!selectedRegularToppings.isEmpty()) {
+            sandwichDetails.append("Regular Toppings: ").append(String.join(", ", selectedRegularToppings)).append("\n");
+        }
+
+        if (!selectedSauces.isEmpty()) {
+            sandwichDetails.append("Sauces: ").append(String.join(", ", selectedSauces)).append("\n");
+        }
+
+        sandwichDetails.append("Price: $").append(sandwichPrice).append("\n");
+
+        orderDetails.add(sandwichDetails.toString());
+
+        String selectedChipType = chipsSelections.getSelectedChipType();
+        double chipPrice = chipsSelections.calculateChipPrice(selectedChipType);
+        totalOrderPrice += chipPrice;
+
+        StringBuilder chipsDetails = new StringBuilder();
+        chipsDetails.append("Chips Details:\n");
+        chipsDetails.append("Chip Type: ").append(selectedChipType).append("\n");
+        chipsDetails.append("Price: $").append(chipPrice).append("\n");
+
+        orderDetails.add(chipsDetails.toString());
+
+        // Drink details
+        String selectedDrinkSize = drinkSelections.getSelectedDrinkSize();
+        String drinkType = "DrinkType";
+        double drinkPrice = drinkSelections.calculateDrinkPrice(selectedDrinkSize);
+        totalOrderPrice += drinkPrice;
+
+        StringBuilder drinkDetails = new StringBuilder();
+        drinkDetails.append("Drink Details:\n");
+        drinkDetails.append("Drink Size: ").append(selectedDrinkSize).append("\n");
+        drinkDetails.append("Drink Type: ").append(drinkType).append("\n");
+        drinkDetails.append("Price: $").append(drinkPrice).append("\n");
+
+        orderDetails.add(drinkDetails.toString());
+
+        // Set the total price
+        totalOrderPrice = Math.round(totalOrderPrice * 100.0) / 100.0;
+        generateReceipt(totalOrderPrice);
+    }
+
+    private void generateReceipt(double totalOrderPrice) {
+        receiptFileManager.createReceiptFile(orderDetails, totalOrderPrice);
+        JOptionPane.showMessageDialog(null, "Receipt generated successfully!");
+        orderDetails.clear();
         dispose();
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

@@ -12,7 +12,7 @@ public class Drink {
     }
 
     private void initializePrices() {
-        switch (drinkSize) {
+        switch (drinkSize.toLowerCase()) {
             case "small":
                 drinkPrice = 2.00;
                 break;
