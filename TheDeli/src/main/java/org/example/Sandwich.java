@@ -90,7 +90,6 @@ public class Sandwich {
     public double calculateTotalPrice() {
         double totalPrice = 0.0;
 
-        // Base price based on size
         switch (size) {
             case SMALL:
                 totalPrice += 5.50;
@@ -103,21 +102,20 @@ public class Sandwich {
                 break;
         }
 
-        // Pricing for extra meat
         if ("Yes".equalsIgnoreCase(extraMeat)) {
             switch (size) {
                 case SMALL:
-                    totalPrice += 1.50; // 1.00 for first meat + 0.50 for extra
+                    totalPrice += 1.50;
                     break;
                 case MEDIUM:
-                    totalPrice += 3.00; // 2.00 for first meat + 1.00 for extra
+                    totalPrice += 3.00;
                     break;
                 case LARGE:
-                    totalPrice += 4.50; // 3.00 for first meat + 1.50 for extra
+                    totalPrice += 4.50;
                     break;
             }
         } else {
-            // Price for first meat choice only
+
             switch (size) {
                 case SMALL:
                     totalPrice += 1.00;
@@ -131,21 +129,19 @@ public class Sandwich {
             }
         }
 
-        // Pricing for extra cheese
         if ("Yes".equalsIgnoreCase(extraCheese)) {
             switch (size) {
                 case SMALL:
-                    totalPrice += 1.05; // 0.75 for first cheese + 0.30 for extra
+                    totalPrice += 1.05;
                     break;
                 case MEDIUM:
-                    totalPrice += 2.10; // 1.50 for first cheese + 0.60 for extra
+                    totalPrice += 2.10;
                     break;
                 case LARGE:
-                    totalPrice += 3.15; // 2.25 for first cheese + 0.90 for extra
+                    totalPrice += 3.15;
                     break;
             }
         } else {
-            // Price for first cheese choice only
             switch (size) {
                 case SMALL:
                     totalPrice += 0.75;
@@ -158,7 +154,6 @@ public class Sandwich {
                     break;
             }
         }
-
         return totalPrice;
     }
 }

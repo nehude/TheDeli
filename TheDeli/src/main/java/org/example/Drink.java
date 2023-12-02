@@ -28,12 +28,6 @@ public class Drink {
         }
     }
 
-    public void displayDrinkDetails() {
-        System.out.println("Drink: " + drinkType);
-        System.out.println("Size: " + drinkSize);
-        System.out.println("Price: $" + drinkPrice);
-    }
-
     public String getDrinkSize() {
         return drinkSize;
     }
@@ -48,15 +42,6 @@ public class Drink {
 
     public void setDrinkType(String drinkType) {
         this.drinkType = drinkType;
-    }
-
-    public double getDrinkPrice() {
-        return drinkPrice;
-    }
-
-    // total price including drink
-    public double calculateTotalPrice() {
-        return drinkPrice;
     }
 }
 

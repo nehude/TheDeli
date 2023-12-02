@@ -112,15 +112,14 @@ public class SandwichSelections extends JFrame {
         JPanel saucesPanel = createSaucesPanel();
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, toppingsPanel, saucesPanel);
-        splitPane.setResizeWeight(0.5); // Adjust this value as needed
-        splitPane.setAlignmentX(Component.CENTER_ALIGNMENT); // Center alignment
+        splitPane.setResizeWeight(0.5);
+        splitPane.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Use a wrapper panel with a BoxLayout to center the splitPane
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.X_AXIS));
-        centerPanel.add(Box.createHorizontalGlue()); // Glue before
+        centerPanel.add(Box.createHorizontalGlue());
         centerPanel.add(splitPane);
-        centerPanel.add(Box.createHorizontalGlue()); // Glue after
+        centerPanel.add(Box.createHorizontalGlue());
 
         add(sizePanel);
         add(breadPanel);

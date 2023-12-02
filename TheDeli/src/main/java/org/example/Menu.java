@@ -1,5 +1,4 @@
 package org.example;
-import java.util.ArrayList;
 
 public class Menu {
 
@@ -50,21 +49,18 @@ public class Menu {
                 break;
         }
 
-        // Meat and cheese premiums
         calculateMeatPremiums();
         calculateCheesePremiums();
 
-        // Side option price
         switch (sideOption) {
             case "au jus":
-                sidePrice = 0.00;  // Included with sandwich price
+                sidePrice = 0.00;
                 break;
             default:
                 System.out.println("Invalid side option: " + sideOption);
                 break;
         }
 
-        // Drink prices
         switch (drinkSize) {
             case "small":
                 drinkPrice = 2.00;
@@ -80,7 +76,6 @@ public class Menu {
                 break;
         }
 
-        // Chips price
         chipsPrice = wantChips ? 1.50 : 0.00;
     }
 
@@ -117,29 +112,6 @@ public class Menu {
     }
 
 
-    public double calculateTotalPrice() {
-        double totalPrice = basePrice;
-
-        // Add meat and cheese premiums
-        if (isMeatPremium()) {
-            totalPrice += meatPremium + extraMeatPremium;
-        }
-
-        if (isCheesePremium()) {
-            totalPrice += cheesePremium + extraCheesePremium;
-        }
-
-        // Add side option price
-        totalPrice += sidePrice;
-
-        // Add drink price
-        totalPrice += drinkPrice;
-
-        // Add chips price
-        totalPrice += chipsPrice;
-
-        return totalPrice;
-    }
 
     public String getBreadType() {
         return breadType;

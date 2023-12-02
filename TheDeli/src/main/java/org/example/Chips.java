@@ -9,10 +9,6 @@ public class Chips {
         this.chipPrice = 1.50;
     }
 
-    public void setChipType(String chipType) {
-        this.chipType = chipType;
-    }
-
     public double getChipPrice() {
         return chipPrice;
     }
@@ -25,7 +21,7 @@ public class Chips {
         return chipType;
     }
 
-    public double calculateTotalPrice() {
-        return chipPrice;
+    public void setChipType(String chipType) {
+        this.chipType = chipType;
     }
 }

@@ -47,7 +47,7 @@ public class ChipsSelections extends JFrame {
 
         JOptionPane.showMessageDialog(null, "Chips added to order. Price: $" + chipPrice);
 
-        dispose(); // Close this window
+        dispose();
     }
 
     public String getSelectedChipType() {
@@ -55,8 +55,6 @@ public class ChipsSelections extends JFrame {
     }
 
     public double calculateChipPrice(String selectedChipType) {
-        // Replace with the actual logic to calculate chip price based on the selectedChipType
-        // For now, returning a fixed price of $1.50 as a placeholder
         return 1.50;
     }
 }

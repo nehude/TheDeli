@@ -67,8 +67,12 @@ public class UserInterface extends JFrame {
         currentStep = 1;
         receiptFileManager = new ReceiptFileManager();
         sandwichBuilder = new SandwichBuilder();
+
         chipsSelections = new ChipsSelections(receiptFileManager);
         drinkSelections = new DrinkSelections(receiptFileManager);
+
+        chipsSelections.setVisible(false);
+        drinkSelections.setVisible(false);
     }
 
     private void displayOrderScreen() {
@@ -85,22 +89,22 @@ public class UserInterface extends JFrame {
             });
 
             JButton addChipsButton = new JButton("Add Chips");
-            addChipsButton.setBackground(new Color(255, 182, 193));
-            addChipsButton.setForeground(Color.DARK_GRAY);
             addChipsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    chipsSelections.setVisible(true);
+                    if (chipsSelections != null) {
+                        chipsSelections.setVisible(true);
+                    }
                 }
             });
 
             JButton addDrinkButton = new JButton("Add Drink");
-            addDrinkButton.setBackground(new Color(255, 182, 193));
-            addDrinkButton.setForeground(Color.DARK_GRAY);
             addDrinkButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    drinkSelections.setVisible(true);
+                    if (drinkSelections != null) {
+                        drinkSelections.setVisible(true);
+                    }
                 }
             });
 
@@ -205,7 +209,6 @@ public class UserInterface extends JFrame {
 
         orderDetails.add(chipsDetails.toString());
 
-        // Drink details
         String selectedDrinkSize = drinkSelections.getSelectedDrinkSize();
         String drinkType = drinkSelections.getSelectedDrinkType();
         double drinkPrice = drinkSelections.calculateDrinkPrice(selectedDrinkSize);
@@ -219,10 +222,8 @@ public class UserInterface extends JFrame {
 
         orderDetails.add(drinkDetails.toString());
 
-        // Set the total price
         totalOrderPrice = Math.round(totalOrderPrice * 100.0) / 100.0;
 
-        // Show checkout screen
         CheckoutSelections checkoutSelections = new CheckoutSelections(orderDetails, totalOrderPrice, this);
         checkoutSelections.displayCheckoutScreen();
 
@@ -230,25 +231,19 @@ public class UserInterface extends JFrame {
     }
 
     private void resetToInitialState() {
-        // Remove the order buttons from the UI
         remove(buttonPanelStep2);
 
-        // Show the start and exit buttons
         startOrderButton.setVisible(true);
         exitButton.setVisible(true);
 
-        // Reset the user interface
         revalidate();
         repaint();
     }
     private void cancelOrderAndReset() {
-        // Clear all order details
         orderDetails.clear();
 
-        // Reset the UI to the initial state
         resetToInitialState();
     }
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

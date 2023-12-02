@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 public class DrinkSelections extends JFrame {
     private JComboBox<String> drinkSizeComboBox;
-    private JComboBox<String> drinkTypeComboBox; // Add a combo box for drink type
+    private JComboBox<String> drinkTypeComboBox;
     private JButton submitButton;
 
     private String selectedDrinkSize;
-    private String selectedDrinkType; // Store the selected drink type
+    private String selectedDrinkType;
 
     private ReceiptFileManager receiptFileManager;
 
@@ -26,7 +26,6 @@ public class DrinkSelections extends JFrame {
         String[] drinkSizes = {"Small", "Medium", "Large"};
         drinkSizeComboBox = new JComboBox<>(drinkSizes);
 
-        // Add a combo box for drink type
         String[] drinkTypes = {"Coke", "Sprite", "Hi-C", "Fanta", "Lemonade", "Water"};
         drinkTypeComboBox = new JComboBox<>(drinkTypes);
 
@@ -41,7 +40,6 @@ public class DrinkSelections extends JFrame {
         drinkSizePanel.add(new JLabel("Drink Size:"));
         drinkSizePanel.add(drinkSizeComboBox);
 
-        // Add a panel for drink type
         JPanel drinkTypePanel = new JPanel(new FlowLayout());
         drinkTypePanel.add(new JLabel("Drink Type:"));
         drinkTypePanel.add(drinkTypeComboBox);
@@ -50,20 +48,16 @@ public class DrinkSelections extends JFrame {
         buttonPanel.add(submitButton);
 
         add(drinkSizePanel);
-        add(drinkTypePanel); // Add the drink type panel
+        add(drinkTypePanel);
         add(buttonPanel);
         setVisible(true);
     }
 
     private void collectDrinkDetails() {
         selectedDrinkSize = (String) drinkSizeComboBox.getSelectedItem();
-        selectedDrinkType = (String) drinkTypeComboBox.getSelectedItem(); // Get the selected drink type
+        selectedDrinkType = (String) drinkTypeComboBox.getSelectedItem();
 
-        // Calculate the drink price based on the selected size
         double drinkPrice = calculateDrinkPrice(selectedDrinkSize);
-
-        // Use the ReceiptFileManager to print drink details
-        receiptFileManager.printDrinkDetailsToReceipt(selectedDrinkSize, selectedDrinkType, drinkPrice);
 
         JOptionPane.showMessageDialog(null, "Drink added to order. Price: $" + drinkPrice);
 
@@ -71,7 +65,6 @@ public class DrinkSelections extends JFrame {
     }
 
     public double calculateDrinkPrice(String selectedDrinkSize) {
-        // Set the same prices for all drink sizes
         return switch (selectedDrinkSize.toLowerCase()) {
             case "small" -> 2.00;
             case "medium" -> 2.50;

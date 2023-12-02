@@ -15,8 +15,4 @@ public enum Bread {
     public String getBreadType() {
         return breadType;
     }
-
-    public void toast() {
-        System.out.println("Toasting the " + breadType + " bread...");
-    }
 }
